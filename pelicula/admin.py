@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from pelicula.models import Actor, ActorAdmin, Pelicula, PeliculaAdmin
-admin.site.register(Actor, ActorAdmin)
-admin.site.register(Pelicula,PeliculaAdmin)
+from pelicula.models import Alumno, AlumnoAdmin, Curso, CursoAdmin
+admin.site.register(Alumno, AlumnoAdmin)
+admin.site.register(Curso,CursoAdmin)

@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from django.contrib import messages
-from .forms import PeliculaForm
-from pelicula.models import Pelicula, Actuacion
+from .forms import CursoForm
+from pelicula.models import Curso, Asignacion
 
 def pelicula_nueva(request):
     if request.method == "POST":
-        formulario = PeliculaForm(request.POST)
+        formulario = CursoForm(request.POST)
         if formulario.is_valid():
-            pelicula = Pelicula.objects.create(nombre=formulario.cleaned_data['nombre'], anio = formulario.cleaned_data['anio'])
-            for actor_id in request.POST.getlist('actores'):
-                actuacion = Actuacion(actor_id=actor_id, pelicula_id = pelicula.id)
-                actuacion.save()
-            messages.add_message(request, messages.SUCCESS, 'Pelicula Guardada Exitosamente')
+            curso = Curso.objects.create(nombre=formulario.cleaned_data['nombre'])
+            for alumno_id in request.POST.getlist('alumnos'):
+                asignacion = Asignacion(alumno_id=alumno_id, curso_id = curso.id)
+                asignacion.save()
+            messages.add_message(request, messages.SUCCESS, 'Curso creado')
     else:
-        formulario = PeliculaForm()
+        formulario = CursoForm()
     return render(request, 'pelicula/pelicula_editar.html', {'formulario': formulario})

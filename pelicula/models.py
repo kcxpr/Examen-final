@@ -1,32 +1,31 @@
 from django.db import models
 from django.contrib import admin
 
-class Actor(models.Model):
+class Alumno(models.Model):
     nombre = models.CharField(max_length=30)
     fecha_nacimiento = models.DateField()
 
     def __str__(self) :
         return self.nombre
 
-class Pelicula(models.Model):
+class Curso(models.Model):
     nombre = models.CharField(max_length=60)
-    anio = models.IntegerField()
-    actores = models.ManyToManyField(Actor, through='Actuacion')
+    alumnos = models.ManyToManyField(Alumno, through='Asignacion')
 
 
     def __str__(self) :
         return self.nombre
 
-class Actuacion (models.Model):
-    actor= models.ForeignKey(Actor, on_delete= models.CASCADE)
-    pelicula= models.ForeignKey(Pelicula, on_delete= models.CASCADE)
+class Asignacion (models.Model):
+    alumno= models.ForeignKey(Alumno, on_delete= models.CASCADE)
+    curso= models.ForeignKey(Curso, on_delete= models.CASCADE)
 
-class ActuacionInLine(admin.TabularInline):
-    model=Actuacion
+class AsignacionInLine(admin.TabularInline):
+    model=Asignacion
     extra=1
 
-class ActorAdmin(admin.ModelAdmin):
-    inlines=(ActuacionInLine,)
+class AlumnoAdmin(admin.ModelAdmin):
+    inlines=(AsignacionInLine,)
 
-class PeliculaAdmin(admin.ModelAdmin):
-    inlines=(ActuacionInLine,)
+class CursoAdmin(admin.ModelAdmin):
+    inlines=(AsignacionInLine,)
