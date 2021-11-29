@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib import messages
 from .forms import CursoForm
 from pelicula.models import Curso, Asignacion
@@ -10,7 +10,7 @@ def pelicula_nueva(request):
             curso = Curso.objects.create(nombre=formulario.cleaned_data['nombre'])
             for alumno_id in request.POST.getlist('alumnos'):
                 asignacion = Asignacion(alumno_id=alumno_id, curso_id = curso.id)
-                asignacion.save()
+                asignacion.save()  
             messages.add_message(request, messages.SUCCESS, 'Curso creado')
     else:
         formulario = CursoForm()
