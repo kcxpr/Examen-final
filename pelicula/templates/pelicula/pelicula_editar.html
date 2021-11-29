@@ -1,9 +1,12 @@
 {% extends 'pelicula/base.html' %}
 
     {% block content %}
-        <h1>Registrar un curso</h1>
+    <center>
+        <p class="lead">Registrar un curso</p><br>
+       
         <form method="POST" class="post-form">{% csrf_token %}
             {{ formulario.as_p }}
-            <button type="submit" class="save btn btn-default">Guardar</button>
+           <br> <button type="submit" class="save btn btn-default">Guardar</button>
         </form>
+    </center>
     {% endblock %}

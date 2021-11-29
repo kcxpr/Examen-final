@@ -9,7 +9,8 @@ class CursoForm(forms.ModelForm):
         fields = ('nombre','alumnos')
 
     def __init__ (self, *args, **kwargs):
+        
         super(CursoForm, self).__init__(*args, **kwargs)
-        self.fields["alumnos"].widget = forms.widgets.CheckboxSelectMultiple()
         self.fields["alumnos"].help_text = "Ingrese los alumnos que formaran parte del curso"
+        self.fields["alumnos"].widget = forms.widgets.CheckboxSelectMultiple()
         self.fields["alumnos"].queryset = Alumno.objects.all()
