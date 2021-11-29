@@ -11,7 +11,7 @@ def pelicula_nueva(request):
             for alumno_id in request.POST.getlist('alumnos'):
                 asignacion = Asignacion(alumno_id=alumno_id, curso_id = curso.id)
                 asignacion.save()  
-            messages.add_message(request, messages.SUCCESS, 'Curso creado')
+            messages.add_message(request, messages.SUCCESS, 'Curso creado exitosamente')
     else:
         formulario = CursoForm()
     return render(request, 'pelicula/pelicula_editar.html', {'formulario': formulario})
